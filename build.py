@@ -85,10 +85,36 @@ def render_cover(issue: Issue) -> None:
         shutil.move(str(produced[0]), str(issue.cover))
 
 
+def jpeg_size(path: Path):
+    """Return (width, height) of a baseline JPEG without external deps."""
+    data = path.read_bytes()
+    if data[:2] != b"\xff\xd8":
+        raise ValueError(f"{path} is not a JPEG")
+    i = 2
+    while i < len(data) - 1:
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        marker = data[i + 1]
+        i += 2
+        # Standalone markers (no length): padding, RSTn.
+        if marker in (0xD8, 0xD9) or 0xD0 <= marker <= 0xD7:
+            continue
+        seg_len = int.from_bytes(data[i:i + 2], "big")
+        # SOFn frame headers carry the dimensions (excl. non-SOF C4/C8/CC).
+        if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
+            height = int.from_bytes(data[i + 3:i + 5], "big")
+            width = int.from_bytes(data[i + 5:i + 7], "big")
+            return width, height
+        i += seg_len
+    raise ValueError(f"no SOF marker found in {path}")
+
+
 def card_html(issue: Issue) -> str:
     label = html.escape(issue.label)
+    width, height = jpeg_size(issue.cover)
     return f"""        <a class="card" href="documents/{html.escape(issue.pdf.name)}">
-          <img src="assets/covers/{html.escape(issue.cover.name)}" alt="Forside – {label}" loading="lazy">
+          <img src="assets/covers/{html.escape(issue.cover.name)}" alt="Forside – {label}" width="{width}" height="{height}" loading="lazy">
           <span class="caption">{label}</span>
         </a>"""
 
