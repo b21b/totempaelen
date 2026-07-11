@@ -1,0 +1,148 @@
+/* Totempælen archive — styling mirrors https://medlem.b21b.dk/ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Poppins, Calibri, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+  border-top: 2px solid #ddd;
+}
+
+.container {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #23527c;
+  text-decoration: underline;
+}
+
+/* Header */
+#header {
+  background-color: #fff;
+  padding: 2em 0 1em;
+  text-align: center;
+}
+
+#header .logo {
+  height: 82px;
+  width: auto;
+}
+
+#header h1 {
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 0.4em 0 0;
+}
+
+#header .lead {
+  font-size: 21px;
+  font-weight: 300;
+  margin: 0.3em 0 0;
+  color: #555;
+}
+
+/* Main content */
+#main-content {
+  min-height: 50vh;
+  padding-bottom: 2em;
+}
+
+.intro {
+  font-size: 16px;
+  color: #555;
+  margin: 1.5em 0;
+}
+
+.year {
+  margin-bottom: 2.5em;
+}
+
+.year h2 {
+  font-weight: 500;
+  font-size: 28px;
+  margin: 0 0 0.6em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Cover grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5em;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #333;
+}
+
+.card:hover,
+.card:focus {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.card:hover img,
+.card:focus img {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
+}
+
+.card .caption {
+  display: block;
+  margin-top: 0.6em;
+  font-weight: 500;
+}
+
+/* Footer */
+footer {
+  margin-top: 2em;
+  background-color: #036;
+  padding: 2em 0;
+  color: #fff;
+}
+
+footer h3 {
+  font-weight: 500;
+  margin-top: 0;
+}
+
+footer a {
+  color: #fff;
+}
+
+footer a:hover,
+footer a:focus {
+  color: #fff;
+  text-decoration: underline;
+}
